@@ -1,0 +1,11 @@
+const KEYS = { cart: "pulsestore-cart", preferences: "pulsestore-preferences", wishlist: "pulsestore-wishlist", theme: "pulsestore-theme" };
+const read = (key, fallback) => { try { const value = JSON.parse(localStorage.getItem(key)); return value ?? fallback; } catch { return fallback; } };
+export const getCart = () => read(KEYS.cart, []);
+export const saveCart = (value) => localStorage.setItem(KEYS.cart, JSON.stringify(value));
+export const getPreferences = () => read(KEYS.preferences, {});
+export const savePreferences = (value) => localStorage.setItem(KEYS.preferences, JSON.stringify(value));
+export const getWishlist = () => read(KEYS.wishlist, []);
+export const saveWishlist = (value) => localStorage.setItem(KEYS.wishlist, JSON.stringify(value));
+export const getTheme = () => localStorage.getItem(KEYS.theme) || "light";
+export const saveTheme = (value) => localStorage.setItem(KEYS.theme, value);
+export const clearSavedData = () => Object.values(KEYS).forEach((key) => localStorage.removeItem(key));

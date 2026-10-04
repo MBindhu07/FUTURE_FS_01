@@ -1,15 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="M Bindhu — Computer Science & Design student and full-stack developer portfolio." />
-    <meta name="keywords" content="M Bindhu, portfolio, full stack developer, React, Node.js, Python, AI" />
-    <meta name="author" content="M Bindhu" />
-    <title>M Bindhu | Full Stack Developer</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PulseStore — professional responsive product discovery experience powered by FakeStoreAPI and vanilla JavaScript.">
+  <meta name="theme-color" content="#6757e8">
+  <title>PulseStore — Smart Product Store</title>
+  <link rel="preconnect" href="https://fakestoreapi.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="PulseStore home">
+        <span class="brand-mark">P</span>
+        <span><strong>PulseStore</strong><small>Smart shopping, simply.</small></span>
+      </a>
+      <div class="header-search search-wrap">
+        <span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products" autocomplete="off"><kbd>/</kbd>
+      </div>
+      <div class="header-actions">
+        <button id="themeBtn" class="icon-btn" type="button" aria-label="Toggle theme" title="Toggle theme">☾</button>
+        <button id="wishlistBtn" class="icon-btn wishlist-head" type="button" aria-label="Show wishlist" title="Wishlist">♡<span id="wishlistCount">0</span></button>
+        <button id="cartOpenBtn" class="cart-button" type="button" aria-haspopup="dialog" aria-controls="cartDrawer" aria-expanded="false">🛒 <span>Cart</span> <b id="cartCount">0</b></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Dynamic JavaScript · REST API · ES6 Modules</span>
+          <h1>Discover better.<br><span>Shop smarter.</span></h1>
+          <p>Live products, instant search, category filters, smart sorting, wishlist and a persistent shopping cart — built with accessible vanilla JavaScript.</p>
+          <div class="hero-actions"><a class="primary-cta" href="#products">Explore products ↓</a><span class="api-status"><i></i> Live API connected</span></div>
+        </div>
+        <div class="hero-dashboard">
+          <div class="mini-dashboard-head"><span>Store overview</span><strong>LIVE</strong></div>
+          <div class="hero-stat-grid">
+            <div><strong id="heroProductCount">—</strong><span>Products</span></div>
+            <div><strong id="heroCategoryCount">—</strong><span>Categories</span></div>
+            <div><strong>24/7</strong><span>Available</span></div>
+            <div><strong>100%</strong><span>Responsive</span></div>
+          </div>
+          <div class="dashboard-note"><span>✓</span> Your preferences are saved automatically</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="promo-strip">
+      <div class="container promo-inner"><span class="promo-icon">✦</span><div><strong>Smart shopping starts here</strong><span>Use search, filters, sorting and wishlist to find your perfect product.</span></div><button id="promoAction" type="button">Show top rated →</button></div>
+    </section>
+
+    <section id="products" class="container products-section">
+      <div id="errorBanner" class="error-banner" role="alert" hidden><span class="banner-icon">!</span><div><strong>We couldn't load the products</strong><p id="errorMessage">Check your connection and try again.</p></div><button id="retryBtn" type="button">Retry</button></div>
+
+      <div class="section-heading">
+        <div><span class="section-kicker">Curated catalog</span><h2>Explore products</h2><p id="resultCount" aria-live="polite">Loading products...</p></div>
+        <div class="heading-actions"><button id="refreshBtn" class="refresh-btn" type="button">↻ Refresh</button><button id="clearCacheBtn" class="text-btn" type="button">Reset</button></div>
+      </div>
+
+      <div class="controls-panel">
+        <div class="search-wrap mobile-search"><span aria-hidden="true">⌕</span><input id="mobileSearchInput" type="search" placeholder="Search by name or description..." aria-label="Search products" autocomplete="off"></div>
+        <div class="filter-row">
+          <div class="sort-field"><label for="sortSelect">Sort by</label><select id="sortSelect"><option value="default">Featured</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="rating-desc">Top Rated</option><option value="name-asc">Name: A–Z</option><option value="name-desc">Name: Z–A</option></select></div>
+          <button id="wishlistFilterBtn" class="filter-btn" type="button">♡ Wishlist <span id="wishlistFilterCount">0</span></button>
+          <div class="results-chip"><b id="resultChipCount">0</b> items</div>
+        </div>
+      </div>
+
+      <div class="category-bar"><div id="categoryTabs" class="tabs" role="tablist" aria-label="Product categories"><button class="tab active" data-category="all" role="tab" aria-selected="true" type="button">All</button></div></div>
+      <div id="productGrid" class="product-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state" hidden><div class="empty-icon">⌕</div><h3>No matching products</h3><p>Try another search, category or wishlist filter.</p><button id="clearFiltersBtn" class="primary-cta compact" type="button">Clear filters</button></div>
+    </section>
+
+    <section class="features-section"><div class="container feature-grid"><article><span>⚡</span><div><h3>Fast discovery</h3><p>Instant filtering and sorting without page reloads.</p></div></article><article><span>♡</span><div><h3>Save favorites</h3><p>Keep a personal wishlist in your browser.</p></div></article><article><span>✓</span><div><h3>Persistent cart</h3><p>Your cart survives refreshes with localStorage.</p></div></article><article><span>⌁</span><div><h3>Responsive by design</h3><p>Comfortable shopping from phone to desktop.</p></div></article></div></section>
+  </main>
+
+  <aside id="cartDrawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true"><div class="drawer-overlay" id="cartOverlay"></div><div class="drawer-panel"><div class="drawer-header"><div><span class="section-kicker">Your selection</span><h2 id="cartTitle">Shopping cart</h2></div><button id="cartCloseBtn" class="close-btn" type="button" aria-label="Close cart">×</button></div><div id="cartItems" class="cart-items"></div><div id="cartEmpty" class="cart-empty" hidden><div>🛒</div><h3>Your cart is empty</h3><p>Add a product to start shopping.</p></div><div class="cart-footer"><div class="cart-total-row"><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div><p>Taxes and delivery are calculated at checkout.</p><button id="checkoutBtn" class="checkout-btn" type="button">Continue to checkout</button></div></div></aside>
+
+  <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true"><div id="modalOverlay" class="modal-overlay"></div><div class="modal-card"><button id="modalClose" class="close-btn modal-close" type="button" aria-label="Close product details">×</button><div id="modalContent"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <button id="backTop" class="back-top" type="button" aria-label="Back to top">↑</button>
+
+  <footer class="site-footer"><div class="container footer-inner"><div><strong>PulseStore</strong><span>Professional REST API shopping UI built with vanilla JavaScript.</span></div><div><span>Fake Store API</span><span>·</span><span>ES6 Modules</span><span>·</span><span>Accessible UI</span></div></div></footer>
+  <script type="module" src="js/app.js"></script>
+</body>
 </html>
